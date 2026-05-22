@@ -1,0 +1,50 @@
+spring:
+  application:
+    name: fitmetric
+  main:
+    allow-circular-references: true
+
+  datasource:
+    url: jdbc:postgresql://aws-1-eu-west-2.pooler.supabase.com:5432/postgres?sslmode=require
+    username: postgres.zymxatcethafbpnzppxu
+    password: Torc=climax6
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
+      connection-timeout: 30000
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: false
+        jdbc:
+          batch_size: 20
+
+server:
+  port: 5000
+  address: 0.0.0.0
+
+jwt:
+  secret: "8Zz5Yt2Xw7Vc4Fb9Np3Lm6Qk1Rj0Hs8Da2Gf4Jk9Lo5Pq7We3Ty6Uy1Xc2Vb8Nm0"
+  expiration: 86400000
+
+gemini:
+  api:
+    key: AIzaSyANVPk3cBNWTa7tXkivG7pesCrvsY--xbY
+    url: https://generativelanguage.googleapis.com/v1
+    model: gemini-1.5-pro
+    max-retries: 3
+    timeout-seconds: 30
+    temperature: 0.7
+    max-tokens: 2048
+
+logging:
+  level:
+    com.fitmetric: DEBUG
+    org.springframework.security: WARN
+    org.hibernate.SQL: WARN

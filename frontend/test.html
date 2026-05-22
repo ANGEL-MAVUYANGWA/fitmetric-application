@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>API Test</title>
+    <style>
+        body { font-family: Arial; padding: 20px; background: #f5f5f5; }
+        .container { max-width: 500px; margin: 0 auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        input { width: 100%; padding: 10px; margin: 8px 0; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; }
+        button { width: 100%; padding: 12px; background: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; }
+        button:hover { background: #45a049; }
+        pre { background: #f0f0f0; padding: 10px; margin-top: 20px; border-radius: 5px; overflow-x: auto; }
+        .error { color: red; }
+        .success { color: green; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>FitMetric Pro - Signup Test</h2>
+        <input type="email" id="email" placeholder="Email" value="test@example.com">
+        <input type="password" id="password" placeholder="Password" value="test1234">
+        <input type="text" id="name" placeholder="Name" value="Test User">
+        <button onclick="signup()">Sign Up</button>
+        <div id="status"></div>
+        <pre id="result">Click Sign Up to test...</pre>
+    </div>
+
+    <script>
+        async function signup() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const name = document.getElementById('name').value;
+            
+            const resultEl = document.getElementById('result');
+            const statusEl = document.getElementById('status');
+            
+            resultEl.textContent = 'Loading...';
+            statusEl.innerHTML = '';
+            
+            try {
+                const response = await fetch('http://localhost:5000/api/auth/signup', {
+                    method: 'POST',
+                    mode: 'cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email, password, name })
+                });
+                
+                const data = await response.json();
+                resultEl.textContent = JSON.stringify(data, null, 2);
+                
+                if (response.ok) {
+                    statusEl.innerHTML = '<p class="success">✅ Signup successful!</p>';
+                    console.log('Success:', data);
+                } else {
+                    statusEl.innerHTML = '<p class="error">❌ Error: ' + (data.message || 'Unknown error') + '</p>';
+                    console.error('Error:', data);
+                }
+            } catch (error) {
+                resultEl.textContent = 'Error: ' + error.message;
+                statusEl.innerHTML = '<p class="error">❌ Network Error: ' + error.message + '</p>';
+                console.error('Fetch error:', error);
+            }
+        }
+    </script>
+</body>
+</html>

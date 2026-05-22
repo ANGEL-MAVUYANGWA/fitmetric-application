@@ -1,0 +1,7 @@
+{
+  "name": "FitMetric Pro",
+  "description": "A comprehensive weight and health tracking application with AI-powered nutrition analysis, body measurement tracking, and interactive progress analytics.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
