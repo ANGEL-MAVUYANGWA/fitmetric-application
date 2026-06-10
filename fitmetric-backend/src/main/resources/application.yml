@@ -30,7 +30,7 @@ server:
   address: 0.0.0.0
 
 jwt:
-  secret: "8Zz5Yt2Xw7Vc4Fb9Np3Lm6Qk1Rj0Hs8Da2Gf4Jk9Lo5Pq7We3Ty6Uy1Xc2Vb8Nm0"
+  secret: "Your secret jwt key "
   expiration: 86400000
 
 gemini:
